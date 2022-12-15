@@ -25,9 +25,9 @@ def read_input(uri: str) -> Tuple[List[List[str]], List[Tuple[int, ...]]]:
 def move_crates(
         stacks: List[List[str]],
         move: Tuple[int, ...],
-        arrange_method: Callable[[List[str]], List[str]]
+        move_method: Callable[[List[str]], List[str]]
 ) -> List[List[str]]:
-    stacks[move[2]-1] = stacks[move[2]-1] + arrange_method(stacks[move[1]-1][-move[0]:])
+    stacks[move[2]-1] = stacks[move[2]-1] + move_method(stacks[move[1] - 1][-move[0]:])
     stacks[move[1]-1] = stacks[move[1]-1][:-move[0]]
     return stacks
 
@@ -35,10 +35,10 @@ def move_crates(
 def solve(
         stacks: List[List[str]],
         moves: List[Tuple[int, ...]],
-        arrange_method: Callable[[List[str]], List[str]]
+        move_method: Callable[[List[str]], List[str]]
 ) -> str:
     for move in moves:
-        stacks = move_crates(stacks=stacks, move=move, arrange_method=arrange_method)
+        stacks = move_crates(stacks=stacks, move=move, move_method=move_method)
     return ''.join(list(map(lambda x: x[-1], stacks)))
 
 
@@ -46,9 +46,9 @@ def main():
     path = os.path.dirname(os.path.abspath(__file__)) + '/Day5.txt'
     stacks, moves = read_input(uri=path)
     print_tr(1, timed(
-        f=lambda: solve(stacks=copy.deepcopy(stacks), moves=moves, arrange_method=lambda x: list(reversed(x)))
+        f=lambda: solve(stacks=copy.deepcopy(stacks), moves=moves, move_method=lambda x: list(reversed(x)))
     ))
-    print_tr(2, timed(f=lambda: solve(stacks=copy.deepcopy(stacks), moves=moves, arrange_method=lambda x: list(x))))
+    print_tr(2, timed(f=lambda: solve(stacks=copy.deepcopy(stacks), moves=moves, move_method=lambda x: list(x))))
 
 
 if __name__ == '__main__':
