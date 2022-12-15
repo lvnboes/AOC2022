@@ -13,4 +13,4 @@ def timed(f: Callable[[], Any]) -> TimedResult:
     start = datetime.now()
     result = f()
     end = datetime.now()
-    return TimedResult(result=result, duration=round((end-start).total_seconds()*1000))
+    return TimedResult(result=result, duration=round((end-start).total_seconds()*1000000))

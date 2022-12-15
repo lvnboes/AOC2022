@@ -46,9 +46,9 @@ def main():
         f=lambda: tourney_score(puzzle_input=day_2_input, xyz_method=lambda x, y: determine_play(x=x, result=y))
     )
     print(f'Result 1 : {part_1.result}')
-    print(f'Duration 1 : {part_1.duration} ms')
+    print(f'Duration 1 : {part_1.duration} µs')
     print(f'Result 2 : {part_2.result}')
-    print(f'Duration 2 : {part_2.duration} ms')
+    print(f'Duration 2 : {part_2.duration} µs')
 
 
 if __name__ == '__main__':

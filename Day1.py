@@ -20,9 +20,9 @@ def main():
     part_1 = utils.timed(f=lambda: get_cals_of_max_elves(puzzle_input=day_1_input, max_elf_amount=1))
     part_2 = utils.timed(f=lambda: get_cals_of_max_elves(puzzle_input=day_1_input, max_elf_amount=3))
     print(f'Result 1 : {part_1.result}')
-    print(f'Duration 1 : {part_1.duration} ms')
+    print(f'Duration 1 : {part_1.duration} µs')
     print(f'Result 2 : {part_2.result}')
-    print(f'Duration 2 : {part_2.duration} ms')
+    print(f'Duration 2 : {part_2.duration} µs')
 
 
 if __name__ == '__main__':
