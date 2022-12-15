@@ -14,3 +14,8 @@ def timed(f: Callable[[], Any]) -> TimedResult:
     result = f()
     end = datetime.now()
     return TimedResult(result=result, duration=round((end-start).total_seconds()*1000000))
+
+
+def print_tr(n: int, timed_result: TimedResult):
+    print(f'Result {n} : {timed_result.result}')
+    print(f'Duration {n} : {timed_result.duration} µs')

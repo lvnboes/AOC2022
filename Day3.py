@@ -1,7 +1,6 @@
 import os
 from typing import List, Callable
-
-import utils
+from utils import timed, print_tr
 
 
 def read_input(uri: str) -> List[str]:
@@ -39,17 +38,13 @@ def solve(backpacks: List[str], partitioned_method: Callable[[List[str]], List[L
 def main():
     path = os.path.dirname(os.path.abspath(__file__)) + '/Day3.txt'
     day_3_input = read_input(uri=path)
-    part_1 = utils.timed(f=lambda: solve(backpacks=day_3_input, partitioned_method=compartmentalize))
-    part_2 = utils.timed(
+    print_tr(1, timed(f=lambda: solve(backpacks=day_3_input, partitioned_method=compartmentalize)))
+    print_tr(2, timed(
         f=lambda: solve(
             backpacks=day_3_input,
             partitioned_method=lambda x: group_by_number(number=3, backpacks=x, grouped_backpacks=[])
         )
-    )
-    print(f'Result 1 : {part_1.result}')
-    print(f'Duration 1 : {part_1.duration} µs')
-    print(f'Result 2 : {part_2.result}')
-    print(f'Duration 2 : {part_2.duration} µs')
+    ))
 
 
 if __name__ == '__main__':

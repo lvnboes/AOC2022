@@ -1,7 +1,6 @@
 import os.path
 from typing import List
-
-import utils
+from utils import timed, print_tr
 
 
 def read_input(uri: str) -> List[List[int]]:
@@ -17,12 +16,8 @@ def get_cals_of_max_elves(puzzle_input: List[List[int]], max_elf_amount: int) ->
 def main():
     path = os.path.dirname(os.path.abspath(__file__)) + '/Day1.txt'
     day_1_input = read_input(uri=path)
-    part_1 = utils.timed(f=lambda: get_cals_of_max_elves(puzzle_input=day_1_input, max_elf_amount=1))
-    part_2 = utils.timed(f=lambda: get_cals_of_max_elves(puzzle_input=day_1_input, max_elf_amount=3))
-    print(f'Result 1 : {part_1.result}')
-    print(f'Duration 1 : {part_1.duration} µs')
-    print(f'Result 2 : {part_2.result}')
-    print(f'Duration 2 : {part_2.duration} µs')
+    print_tr(1, timed(f=lambda: get_cals_of_max_elves(puzzle_input=day_1_input, max_elf_amount=1)))
+    print_tr(2, timed(f=lambda: get_cals_of_max_elves(puzzle_input=day_1_input, max_elf_amount=3)))
 
 
 if __name__ == '__main__':
