@@ -1,19 +1,46 @@
 import os
-from typing import List, Tuple
+from typing import List, Callable
 
 
-def read_input(uri: str) -> List[Tuple[str, str]]:
+def read_input(uri: str) -> List[str]:
     with open(file=uri, mode='rt') as input_file:
-        input_list = list(map(lambda x: x.replace('\n', ''), input_file))
-    return list(map(lambda x: (x[:int(len(x)/2)], x[int(-len(x)/2):]), input_list))
+        return list(map(lambda x: x.replace('\n', ''), input_file))
 
 
-def part_1(puzzle_input: List[Tuple[str, str]]) -> int:
-    doubles = list(map(lambda x: list(set(x[0]).intersection(set(x[1])))[0], puzzle_input))
-    return sum(list(map(lambda x: ord(x) - ord('A') + 27 if x.isupper() else ord(x) - ord('a') + 1, doubles)))
+def compartmentalize(backpacks: List[str]) -> List[List[str]]:
+    return list(map(lambda x: [x[:int(len(x)/2)], x[int(-len(x)/2):]], backpacks))
+
+
+def group_by_number(number: int, backpacks: List[str], grouped_backpacks: List[List[str]]) -> List[List[str]]:
+    if len(backpacks) >= number:
+        grouped_backpacks.append(backpacks[:number])
+        return group_by_number(number=number, backpacks=backpacks[number:], grouped_backpacks=grouped_backpacks)
+    else:
+        return grouped_backpacks
+
+
+def find_common_item(x: str, xs: List[str]) -> str:
+    if len(xs) > 0:
+        return find_common_item(x=''.join(list(set(x).intersection(xs[0]))), xs=xs[1:])
+    else:
+        return x
+
+
+def solve(backpacks: List[str], partitioned_method: Callable[[List[str]], List[List[str]]]) -> int:
+    common_items = list(map(
+        lambda backpack: find_common_item(x=backpack[0], xs=backpack[1:]),
+        partitioned_method(backpacks)
+    ))
+    return sum(list(map(lambda x: ord(x) - ord('A') + 27 if x.isupper() else ord(x) - ord('a') + 1, common_items)))
 
 
 if __name__ == '__main__':
     path = os.path.dirname(os.path.abspath(__file__)) + '/Day3.txt'
     day_3_input = read_input(uri=path)
-    print(f'Part 1 : {part_1(puzzle_input=day_3_input)}')
+    part_1 = solve(backpacks=day_3_input, partitioned_method=compartmentalize)
+    part_2 = solve(
+        backpacks=day_3_input,
+        partitioned_method=lambda x: group_by_number(number=3, backpacks=x, grouped_backpacks=[])
+    )
+    print(f'Part 1 : {part_1}')
+    print(f'Part 2 : {part_2}')
