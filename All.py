@@ -3,6 +3,7 @@ import Day1
 import Day2
 import Day3
 import Day4
+import Day5
 
 
 def run_all():
@@ -10,6 +11,7 @@ def run_all():
     print_day(day=2, f=Day2.main)
     print_day(day=3, f=Day3.main)
     print_day(day=4, f=Day4.main)
+    print_day(day=5, f=Day5.main)
 
 
 def main():
@@ -19,5 +21,4 @@ def main():
 
 
 if __name__ == '__main__':
-
     main()

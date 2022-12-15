@@ -23,5 +23,7 @@ def print_tr(n: int, timed_result: TimedResult):
 
 def print_day(day: int, f: Callable[[], None]):
     print(f'--- Day {day} ---')
-    f()
+    timed_result = timed(lambda: f())
+    print('....................')
+    print(f'Total duration : {timed_result.duration}')
     print()
