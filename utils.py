@@ -1,15 +1,15 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Callable, Any
+from typing import Callable, Any, Optional
 
 
 @dataclass
 class TimedResult:
-    result: Any
     duration: int
+    result: Optional[Any] = None
 
 
-def timed(f: Callable[[], Any]) -> TimedResult:
+def timed(f: Callable[[], Optional[Any]]) -> TimedResult:
     start = datetime.now()
     result = f()
     end = datetime.now()
@@ -19,3 +19,9 @@ def timed(f: Callable[[], Any]) -> TimedResult:
 def print_tr(n: int, timed_result: TimedResult):
     print(f'Result {n} : {timed_result.result}')
     print(f'Duration {n} : {timed_result.duration} µs')
+
+
+def print_day(day: int, f: Callable[[], None]):
+    print(f'--- Day {day} ---')
+    f()
+    print()
