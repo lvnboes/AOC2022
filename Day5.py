@@ -35,7 +35,8 @@ def move_crates(
 def solve(
         stacks: List[List[str]],
         moves: List[Tuple[int, ...]],
-        arrange_method: Callable[[List[str]], List[str]]) -> str:
+        arrange_method: Callable[[List[str]], List[str]]
+) -> str:
     for move in moves:
         stacks = move_crates(stacks=stacks, move=move, arrange_method=arrange_method)
     return ''.join(list(map(lambda x: x[-1], stacks)))
