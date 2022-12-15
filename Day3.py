@@ -1,6 +1,8 @@
 import os
 from typing import List, Callable
 
+import utils
+
 
 def read_input(uri: str) -> List[str]:
     with open(file=uri, mode='rt') as input_file:
@@ -34,13 +36,21 @@ def solve(backpacks: List[str], partitioned_method: Callable[[List[str]], List[L
     return sum(list(map(lambda x: ord(x) - ord('A') + 27 if x.isupper() else ord(x) - ord('a') + 1, common_items)))
 
 
-if __name__ == '__main__':
+def main():
     path = os.path.dirname(os.path.abspath(__file__)) + '/Day3.txt'
     day_3_input = read_input(uri=path)
-    part_1 = solve(backpacks=day_3_input, partitioned_method=compartmentalize)
-    part_2 = solve(
-        backpacks=day_3_input,
-        partitioned_method=lambda x: group_by_number(number=3, backpacks=x, grouped_backpacks=[])
+    part_1 = utils.timed(f=lambda: solve(backpacks=day_3_input, partitioned_method=compartmentalize))
+    part_2 = utils.timed(
+        f=lambda: solve(
+            backpacks=day_3_input,
+            partitioned_method=lambda x: group_by_number(number=3, backpacks=x, grouped_backpacks=[])
+        )
     )
-    print(f'Part 1 : {part_1}')
-    print(f'Part 2 : {part_2}')
+    print(f'Result 1 : {part_1.result}')
+    print(f'Duration 1 : {part_1.duration} ms')
+    print(f'Result 2 : {part_2.result}')
+    print(f'Duration 2 : {part_2.duration} ms')
+
+
+if __name__ == '__main__':
+    main()

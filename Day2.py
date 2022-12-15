@@ -1,6 +1,8 @@
 import os
 from typing import List, Callable
 
+import utils
+
 
 def read_input(uri: str) -> List[List[str]]:
     with open(file=uri, mode='rt') as input_file:
@@ -34,8 +36,20 @@ def tourney_score(puzzle_input: List[List[str]], xyz_method: Callable[[str, str]
     )))
 
 
-if __name__ == '__main__':
+def main():
     path = os.path.dirname(os.path.abspath(__file__)) + '/Day2.txt'
     day_2_input = read_input(uri=path)
-    print(f'Part 1 : {tourney_score(puzzle_input=day_2_input, xyz_method=lambda x, y: ord(y) - ord("X") + 1)}')
-    print(f'Part 2 : {tourney_score(puzzle_input=day_2_input, xyz_method=lambda x, y: determine_play(x=x, result=y))}')
+    part_1 = utils.timed(
+        f=lambda: tourney_score(puzzle_input=day_2_input, xyz_method=lambda x, y: ord(y) - ord("X") + 1)
+    )
+    part_2 = utils.timed(
+        f=lambda: tourney_score(puzzle_input=day_2_input, xyz_method=lambda x, y: determine_play(x=x, result=y))
+    )
+    print(f'Result 1 : {part_1.result}')
+    print(f'Duration 1 : {part_1.duration} ms')
+    print(f'Result 2 : {part_2.result}')
+    print(f'Duration 2 : {part_2.duration} ms')
+
+
+if __name__ == '__main__':
+    main()
