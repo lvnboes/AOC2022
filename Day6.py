@@ -4,8 +4,7 @@ from utils import timed, print_tr
 
 def read_input(uri: str) -> str:
     with open(file=uri, mode='rt') as input_file:
-        input_str = input_file.read()
-    return input_str
+        return input_file.read()
 
 
 def solve(signal: str, marker_size: int) -> int:
