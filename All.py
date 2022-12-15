@@ -18,7 +18,7 @@ def run_all():
 
 def main():
     duration = timed(f=run_all).duration
-    print('--------------------')
+    print('---------------------')
     print(f'Duration : {duration} µs')
 
 
