@@ -8,7 +8,7 @@ def read_input(uri: str) -> str:
 
 
 def solve(signal: str, marker_size: int) -> int:
-    for x in range(marker_size-1, len(signal)):
+    for x in range(marker_size, len(signal)):
         if len(set(signal[x-marker_size:x])) == marker_size:
             return x
 
