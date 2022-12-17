@@ -6,6 +6,7 @@ import Day4
 import Day5
 import Day6
 import Day7
+import Day8
 
 
 def run_all():
@@ -16,6 +17,7 @@ def run_all():
     print_day(day=5, f=Day5.main)
     print_day(day=6, f=Day6.main)
     print_day(day=7, f=Day7.main)
+    print_day(day=8, f=Day8.main)
 
 
 def main():
